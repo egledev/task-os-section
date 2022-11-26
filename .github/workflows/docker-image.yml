@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image 
 
 on:
   push:
@@ -12,14 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
 
-    - name: 'Build the Docker image'
-      run: echo abdo   
+      - name: "login to docker hub"
+      - run: docker login --name ${{ secrets.USER_NAME }} --password ${{ secrets.TOKEN }}
 
-    - name: 'listing the files'
-      run: ls
+      - name: "build image"
+        run: docker build -t ${{ secrets.USER_NAME }}/ostask2
 
-    - uses: actions/checkout@v3
-
-    - name: 'listing after adding files to branch'
-      run: ls
+      - name: "push image to docker hub"
+        run: docker push ${{ secrets.USER_NAME }}/ostask2
