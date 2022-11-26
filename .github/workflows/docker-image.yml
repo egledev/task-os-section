@@ -15,4 +15,11 @@ jobs:
 
     - name: 'Build the Docker image'
       run: echo abdo   
-    
+
+    - name: 'listing the files'
+      run: ls
+
+    - uses: actions/checkout@v3
+
+    - name: 'listing after adding files to branch'
+      run: ls
